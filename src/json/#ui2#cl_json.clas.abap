@@ -30,6 +30,7 @@ CLASS /ui2/cl_json DEFINITION PUBLIC.
         pretty_name      TYPE string OPTIONAL
         assoc_arrays     TYPE abap_bool OPTIONAL
         assoc_arrays_opt TYPE abap_bool OPTIONAL
+        conversion_exits TYPE abap_bool OPTIONAL
       CHANGING
         data             TYPE data.
 
@@ -43,6 +44,7 @@ CLASS /ui2/cl_json DEFINITION PUBLIC.
         ts_as_iso8601    TYPE abap_bool OPTIONAL
         type_descr       TYPE REF TO cl_abap_typedescr OPTIONAL
         format_output    TYPE abap_bool OPTIONAL
+        conversion_exits TYPE abap_bool OPTIONAL
       RETURNING
         VALUE(r_json)    TYPE string.
 
@@ -62,10 +64,11 @@ CLASS /ui2/cl_json DEFINITION PUBLIC.
 
     METHODS constructor
       IMPORTING
-        compress      TYPE abap_bool DEFAULT abap_false
-        pretty_name   TYPE pretty_name_mode DEFAULT pretty_mode-none
-        assoc_arrays  TYPE abap_bool DEFAULT abap_false
-        ts_as_iso8601 TYPE abap_bool DEFAULT abap_false.
+        compress         TYPE abap_bool DEFAULT abap_false
+        pretty_name      TYPE pretty_name_mode DEFAULT pretty_mode-none
+        assoc_arrays     TYPE abap_bool DEFAULT abap_false
+        ts_as_iso8601    TYPE abap_bool DEFAULT abap_false
+        conversion_exits TYPE abap_bool OPTIONAL.
 
   PROTECTED SECTION.
 
@@ -74,6 +77,7 @@ CLASS /ui2/cl_json DEFINITION PUBLIC.
     DATA mv_assoc_arrays TYPE abap_bool.
     DATA mv_ts_as_iso8601 TYPE abap_bool.
     DATA mv_extended TYPE abap_bool.
+    DATA mv_conversion_exits TYPE abap_bool.
 
     METHODS is_compressable
       IMPORTING
